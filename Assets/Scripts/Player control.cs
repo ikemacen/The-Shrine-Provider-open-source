@@ -44,6 +44,7 @@ public class Playercontrol : MonoBehaviour
         float zDriection = Input.GetAxisRaw("Vertical");
 
         _Input = new Vector3(xDriection, 0, zDriection);
+        _Input.Normalize();
     }
 
     void Move()
