@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: bea54dc84163b41a59d4bf6b19004a28
   - enabled: 1
-    path: Assets/Scenes/TestCameraScenes/Cam1.unity
+    path: Assets/Scenes/TestScenes/TestCameraScenes/Cam1.unity
     guid: 9465480ab03dc4e419b7a45c6a2de45b
   - enabled: 1
-    path: Assets/Scenes/TestCameraScenes/Cam2.unity
+    path: Assets/Scenes/TestScenes/TestCameraScenes/Cam2.unity
     guid: 94fa66efa1a124cb8944f15423ca8123
   - enabled: 1
-    path: Assets/Scenes/TestCameraScenes/Cam3.unity
+    path: Assets/Scenes/TestScenes/TestCameraScenes/Cam3.unity
     guid: 9cc0a25e6aed14cf692bdbb7e0538291
   - enabled: 1
-    path: Assets/Scenes/TestCameraScenes/Cam4.unity
+    path: Assets/Scenes/TestScenes/TestCameraScenes/Cam4.unity
     guid: 004962b4da784434da4380356cb8e3ed
   m_configObjects: {}
