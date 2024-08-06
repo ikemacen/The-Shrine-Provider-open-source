@@ -6,24 +6,37 @@ using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
-    // Array for holding each tool we need
-    // Could simply use an arbitrary number of GameObject variables, 
-    // but doing it this way prevents the need for tool prefabs
-    // and only requires the tool script
-    [SerializeField] private MonoScript[] toolList;
+    [SerializeField] private KeyCode interactKey;
+    [SerializeField] private ToolClass[] test;
+    [SerializeField] private GameObject currentTool;
+
+    public void ChangeTool(GameObject newTool) {
+        currentTool = newTool;
+    }
 
     void Awake()
     {
+        //activeToolList = new ToolClass[availableTools.Length];
+        // check if keybinds are initialized
+        if (interactKey == KeyCode.None) {
+            interactKey = KeyCode.E;
+        }
         // For each tool in our tool list
-        foreach(MonoScript newTool in toolList){
+        //foreach(GameObject newTool in availableTools){
             // Create a component for that tool in our parent object (the player)
-            this.gameObject.AddComponent(newTool.GetClass());
+            //var temp = this.gameObject.AddComponent(newTool);
+        //}
+        if(currentTool == null) {
+            //currentTool = availableTools[1].GetClass();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(interactKey))
+        {
+            //currentTool.InteractAction();
+        }
     }
 }

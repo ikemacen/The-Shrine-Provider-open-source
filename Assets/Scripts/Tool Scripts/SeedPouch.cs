@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedPouch : ToolClass 
+public class SeedPouch : MonoBehaviour
 {
-    new public void InteractAction()
-    {
-        print("Look at me go, planting a seed!");
+    private void OnTriggerEnter(Collider other) {
+        print("Pick up seed bag!");
+        ToolManager playerTool = other.gameObject.GetComponent<ToolManager>();
+        playerTool.ChangeTool(this.gameObject);
     }
 }
