@@ -1,9 +1,11 @@
 using UnityEngine;
+using TMPro;
 
 public class CropGrowth : MonoBehaviour
 {
     public GameObject[] growthStages; // Array of crop models for each growth stage
     public float timeBetweenStages = 10f; // Time in seconds between each growth stage
+    public TextMeshPro countdownText; // Reference to the TextMeshPro component
 
     private int currentStage = 0;
     private float growthTimer = 0f;
@@ -29,19 +31,39 @@ public class CropGrowth : MonoBehaviour
             // Increment the timer
             growthTimer += Time.deltaTime;
 
+            // Update the countdown display
+            UpdateCountdownDisplay();
+
             // Check if it's time to progress to the next stage
-            if (growthTimer >= timeBetweenStages && currentStage < growthStages.Length - 1)
+            if (growthTimer >= timeBetweenStages)
             {
-                currentStage++;
-                UpdateGrowthStage();
-                growthTimer = 0f; // Reset the timer
+                if (currentStage == 0)
+                {
+                    currentStage++;
+                    UpdateGrowthStage();
+                    growthTimer = 0f; // Reset the timer
+                }
+                if (currentStage == 1)
+                {
+                    // Stop growing when the last stage is reached
+                    isGrowing = false;
+                    countdownText.text = "Matured"; // Optional: Display a message when fully grown
+                }
             }
         }
     }
 
     public void StartGrowing()
     {
-        isGrowing = true;
+        if (currentStage == 0)
+        {
+            isGrowing = true;
+            UpdateCountdownDisplay(); // Initial update to set the timer display
+        }
+        else
+        {
+            Debug.LogWarning("Crop is already fully grown.");
+        }
     }
 
     void UpdateGrowthStage()
@@ -63,6 +85,21 @@ public class CropGrowth : MonoBehaviour
         else
         {
             Debug.LogError("Current stage GameObject is null or out of bounds.");
+        }
+    }
+
+    void UpdateCountdownDisplay()
+    {
+        if (countdownText != null && isGrowing)
+        {
+            float remainingTime = timeBetweenStages - growthTimer;
+            int minutes = Mathf.FloorToInt(remainingTime / 60f);
+            int seconds = Mathf.FloorToInt(remainingTime % 60);
+            countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        else if (countdownText != null && !isGrowing)
+        {
+            countdownText.text = "Matured2"; // Display "Matured" or another message when fully grown
         }
     }
 }

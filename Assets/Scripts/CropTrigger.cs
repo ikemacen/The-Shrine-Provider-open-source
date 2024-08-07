@@ -2,32 +2,108 @@ using UnityEngine;
 
 public class CropTrigger : MonoBehaviour
 {
-    public GameObject cropPrefab; // The crop prefab to instantiate
+    public GameObject[] cropPrefabs; // Array of crop prefabs to instantiate
     public Transform spawnPoint; // The location where the crop will spawn
+    public KeyCode plantKey = KeyCode.E; // The key used to plant the crop
+
+    private bool playerInTrigger = false; // Flag to check if player is in the trigger box
+    private GameObject player; // Reference to the player object
+    public bool canPlant = true; // Flag to check if planting is allowed
+    public GameObject currentCrop; // Reference to the currently planted crop
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the object entering the trigger is the player
         if (other.CompareTag("Player"))
         {
-            // Instantiate the crop at the spawn point
-            GameObject cropInstance = Instantiate(cropPrefab, spawnPoint.position, spawnPoint.rotation);
+            playerInTrigger = true;
+            player = other.gameObject;
+            Debug.Log("Player entered trigger box. Press 'E' to plant.");
+        }
+    }
 
-            // Get the CropGrowth component from the instantiated crop
-            CropGrowth cropGrowth = cropInstance.GetComponent<CropGrowth>();
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInTrigger = false;
+            player = null;
+            Debug.Log("Player exited trigger box.");
+        }
+    }
 
-            // Start the growth process
-            if (cropGrowth != null)
+    private void Update()
+    {
+        if (playerInTrigger && canPlant && Input.GetKeyDown(plantKey))
+        {
+            PlantCrop();
+        }
+
+        // Allow replanting if the crop has been destroyed
+        if (currentCrop == null)
+        {
+            canPlant = true;
+            Debug.Log("Current crop is null. Replanting is allowed.");
+        }
+    }
+
+    private void PlantCrop()
+    {
+        if (currentCrop == null)
+        {
+            // Get the player's held seed
+            PlayerInventory playerInventory = player.GetComponent<PlayerInventory>();
+            if (playerInventory == null)
             {
-                cropGrowth.StartGrowing();
+                Debug.LogWarning("PlayerInventory script not found.");
+                return;
+            }
+
+            string selectedSeed = playerInventory.GetCurrentSeed();
+            if (string.IsNullOrEmpty(selectedSeed))
+            {
+                Debug.LogWarning("Player is not holding any seed.");
+                return;
+            }
+
+            // Find the corresponding crop prefab based on the selected seed
+            GameObject selectedCropPrefab = null;
+            foreach (GameObject cropPrefab in cropPrefabs)
+            {
+                if (cropPrefab.name == selectedSeed)
+                {
+                    selectedCropPrefab = cropPrefab;
+                    break;
+                }
+            }
+
+            if (selectedCropPrefab != null)
+            {
+                currentCrop = Instantiate(selectedCropPrefab, spawnPoint.position, spawnPoint.rotation);
+                CropGrowth cropGrowth = currentCrop.GetComponent<CropGrowth>();
+
+                if (cropGrowth != null)
+                {
+                    cropGrowth.StartGrowing();
+                    canPlant = false; // Disable planting until crop is destroyed
+                    Debug.Log("Crop planted. Planting disabled until crop is destroyed.");
+                }
+                else
+                {
+                    Debug.LogError("CropGrowth script not found on instantiated crop.");
+                }
             }
             else
             {
-                Debug.LogError("CropGrowth script not found on instantiated crop.");
+                Debug.LogWarning("No crop prefab found for the held seed: " + selectedSeed);
             }
-
-            // Optional: Disable the trigger after activation if you want it to be a one-time event
-            gameObject.SetActive(false);
         }
+    }
+
+    // Public method to be called by CropDestroy
+    public void OnCropDestroyed()
+    {
+        currentCrop = null;
+        canPlant = true;
+        Debug.Log("Crop destroyed. Replanting is allowed.");
     }
 }
