@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class ToolClass : MonoBehaviour
 {
-    public void InteractAction() {
-        print("If you are seeing this, you are stinky.");
+    private void OnTriggerEnter(Collider other) {
+        ToolManager playerTool = other.gameObject.GetComponent<ToolManager>();
+        playerTool.ChangeTool(this.gameObject);
+        this.PickupAction();
+    }
+    public void PickupAction() {
+        print("Despawn Item");
+        this.gameObject.SetActive(false);
+    }
+
+    public virtual void InteractAction() {
+        print("Perform Default Interaction");
     }
 }

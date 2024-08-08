@@ -7,7 +7,6 @@ using UnityEngine;
 public class ToolManager : MonoBehaviour
 {
     [SerializeField] private KeyCode interactKey;
-    [SerializeField] private ToolClass[] test;
     [SerializeField] private GameObject currentTool;
 
     public void ChangeTool(GameObject newTool) {
@@ -16,15 +15,9 @@ public class ToolManager : MonoBehaviour
 
     void Awake()
     {
-        //activeToolList = new ToolClass[availableTools.Length];
         // check if keybinds are initialized
-        if (interactKey == KeyCode.None) {
-            interactKey = KeyCode.E;
-        }
-        // For each tool in our tool list
-        //foreach(GameObject newTool in availableTools){
-            // Create a component for that tool in our parent object (the player)
-            //var temp = this.gameObject.AddComponent(newTool);
+        //if (interactKey == KeyCode.None) {
+            //interactKey = KeyCode.E;
         //}
         if(currentTool == null) {
             //currentTool = availableTools[1].GetClass();
@@ -34,9 +27,8 @@ public class ToolManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(interactKey))
-        {
-            //currentTool.InteractAction();
+        if(Input.GetKeyDown(interactKey) == true) {
+            currentTool.GetComponent<ToolClass>().InteractAction();
         }
     }
 }

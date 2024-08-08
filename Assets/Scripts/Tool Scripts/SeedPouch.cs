@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
-public class SeedPouch : MonoBehaviour
+public class SeedPouch : ToolClass 
 {
-    private void OnTriggerEnter(Collider other) {
-        print("Pick up seed bag!");
-        ToolManager playerTool = other.gameObject.GetComponent<ToolManager>();
-        playerTool.ChangeTool(this.gameObject);
+
+    public override void InteractAction() {
+        print("it lives............");
+    }
+    private void Update() {
+        //if(Input.GetMouseButton(0)) {
+            //print("Test message");
+        //}
     }
 }
