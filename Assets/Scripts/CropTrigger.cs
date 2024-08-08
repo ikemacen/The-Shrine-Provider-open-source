@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CropTrigger : MonoBehaviour
 {
-    public GameObject cropPrefab; // The crop prefab to instantiate
+    public GameObject[] cropPrefabs; // Array of crop prefabs to instantiate
     public Transform spawnPoint; // The location where the crop will spawn
     public KeyCode plantKey = KeyCode.E; // The key used to plant the crop
 
@@ -50,18 +50,51 @@ public class CropTrigger : MonoBehaviour
     {
         if (currentCrop == null)
         {
-            currentCrop = Instantiate(cropPrefab, spawnPoint.position, spawnPoint.rotation);
-            CropGrowth cropGrowth = currentCrop.GetComponent<CropGrowth>();
-
-            if (cropGrowth != null)
+            // Get the player's held seed
+            PlayerInventory playerInventory = player.GetComponent<PlayerInventory>();
+            if (playerInventory == null)
             {
-                cropGrowth.StartGrowing();
-                canPlant = false; // Disable planting until crop is destroyed
-                Debug.Log("Crop planted. Planting disabled until crop is destroyed.");
+                Debug.LogWarning("PlayerInventory script not found.");
+                return;
+            }
+
+            string selectedSeed = playerInventory.GetCurrentSeed();
+            if (string.IsNullOrEmpty(selectedSeed))
+            {
+                Debug.LogWarning("Player is not holding any seed.");
+                return;
+            }
+
+            // Find the corresponding crop prefab based on the selected seed
+            GameObject selectedCropPrefab = null;
+            foreach (GameObject cropPrefab in cropPrefabs)
+            {
+                if (cropPrefab.name == selectedSeed)
+                {
+                    selectedCropPrefab = cropPrefab;
+                    break;
+                }
+            }
+
+            if (selectedCropPrefab != null)
+            {
+                currentCrop = Instantiate(selectedCropPrefab, spawnPoint.position, spawnPoint.rotation);
+                CropGrowth cropGrowth = currentCrop.GetComponent<CropGrowth>();
+
+                if (cropGrowth != null)
+                {
+                    cropGrowth.StartGrowing();
+                    canPlant = false; // Disable planting until crop is destroyed
+                    Debug.Log("Crop planted. Planting disabled until crop is destroyed.");
+                }
+                else
+                {
+                    Debug.LogError("CropGrowth script not found on instantiated crop.");
+                }
             }
             else
             {
-                Debug.LogError("CropGrowth script not found on instantiated crop.");
+                Debug.LogWarning("No crop prefab found for the held seed: " + selectedSeed);
             }
         }
     }

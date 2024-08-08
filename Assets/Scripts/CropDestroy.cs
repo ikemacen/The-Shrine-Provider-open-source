@@ -1,8 +1,10 @@
 using UnityEngine;
+using TMPro;
 
 public class CropDestroy : MonoBehaviour
 {
     public CropTrigger cropTrigger; // Reference to the CropTrigger script
+    public TextMeshPro countdownText; // Reference to the TextMeshPro component to clear text
     bool InTrigger;
 
     private void OnTriggerEnter(Collider other)
@@ -25,11 +27,27 @@ public class CropDestroy : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && InTrigger)
+        if (InTrigger && Input.GetKeyDown(KeyCode.X))
         {
-            cropTrigger.currentCrop = null;
+            if (cropTrigger != null)
+            {
+                cropTrigger.currentCrop = null;
+            }
             Destroy(gameObject);
             Debug.Log("Crop destroyed. Replanting is allowed.");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Clear the countdown text when the crop is destroyed
+        if (countdownText != null)
+        {
+            countdownText.text = string.Empty; // Clear the countdown text
+        }
+        if (cropTrigger != null)
+        {
+            cropTrigger.OnCropDestroyed(); // Notify CropTrigger that the crop is destroyed
         }
     }
 }
