@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
+    // FOR DEBUGGING
     [SerializeField] private KeyCode interactKey;
+
     [SerializeField] private GameObject currentTool;
 
     public void ChangeTool(GameObject newTool) {
@@ -17,18 +19,9 @@ public class ToolManager : MonoBehaviour
         return currentTool;
     }
 
-    void Awake()
-    {
-        // check if keybinds are initialized
-        //if (interactKey == KeyCode.None) {
-            //interactKey = KeyCode.E;
-        //}
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        // for testing player interaction
+        // DEBUG: for testing player interaction
         if(Input.GetKeyDown(interactKey) == true) {
             currentTool.GetComponent<ToolClass>().InteractAction();
         }
