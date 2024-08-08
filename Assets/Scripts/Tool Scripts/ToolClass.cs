@@ -30,10 +30,10 @@ public class ToolClass : MonoBehaviour
     }
     // virtual pickup function in case you want something special to happen on pickup
     public virtual void PickupAction() {
-        print("Set Item World Inactive");
+        Debug.Log("Virtual Pickup Function Success");
     }
     // virtual interaction function to allow for custom interaction behavior
     public virtual void InteractAction() {
-        print("Perform Default Interaction");
+        Debug.Log("Virtual Interact Function Success");
     }
 }
