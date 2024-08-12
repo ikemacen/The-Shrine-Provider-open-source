@@ -3,15 +3,34 @@ using TMPro;
 
 public class CropDestroy : MonoBehaviour
 {
-    public CropTrigger cropTrigger; // Reference to the CropTrigger script
     public TextMeshPro countdownText; // Reference to the TextMeshPro component to clear text
-    bool InTrigger;
+    private bool inTrigger;
+    private CropTrigger cropTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            InTrigger = true;
+            inTrigger = true;
+
+            // Find the CropTrigger in the parent or children of the trigger box, or in nearby objects
+            CropTrigger[] cropTriggers = FindObjectsOfType<CropTrigger>();
+
+            foreach (CropTrigger trigger in cropTriggers)
+            {
+                // Adjust the distance threshold as needed
+                if (Vector3.Distance(trigger.transform.position, transform.position) < 2f)
+                {
+                    cropTrigger = trigger;
+                    break;
+                }
+            }
+
+            if (cropTrigger == null)
+            {
+                Debug.LogWarning("No nearby CropTrigger script found.");
+            }
+
             Debug.Log("Player entered trigger box.");
         }
     }
@@ -20,21 +39,25 @@ public class CropDestroy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            InTrigger = false;
+            inTrigger = false;
             Debug.Log("Player exited trigger box.");
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (InTrigger && Input.GetKeyDown(KeyCode.X))
+        if (inTrigger && Input.GetKeyDown(KeyCode.X))
         {
-            if (cropTrigger != null)
+            if (cropTrigger != null && cropTrigger.currentCrop != null)
             {
+                Destroy(cropTrigger.currentCrop);
                 cropTrigger.currentCrop = null;
+                Debug.Log("Crop destroyed. Replanting is allowed.");
             }
-            Destroy(gameObject);
-            Debug.Log("Crop destroyed. Replanting is allowed.");
+            else
+            {
+                Debug.LogWarning("No crop to destroy.");
+            }
         }
     }
 
@@ -43,8 +66,9 @@ public class CropDestroy : MonoBehaviour
         // Clear the countdown text when the crop is destroyed
         if (countdownText != null)
         {
-            countdownText.text = string.Empty; // Clear the countdown text
+            countdownText.text = string.Empty;
         }
+
         if (cropTrigger != null)
         {
             cropTrigger.OnCropDestroyed(); // Notify CropTrigger that the crop is destroyed
