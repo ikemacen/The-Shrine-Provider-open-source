@@ -9,6 +9,7 @@ public class CropDestroy : MonoBehaviour
     private bool inTrigger;
     private CropTrigger cropTrigger;
     private PlayerInventory playerInventory;
+    public GameObject textObj;
     private void Start(){
         playerInventory = FindAnyObjectByType<PlayerInventory>();
     }
@@ -18,6 +19,7 @@ public class CropDestroy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inTrigger = true;
+            textObj.SetActive(true);
 
             // Find the CropTrigger in the parent or children of the trigger box, or in nearby objects
             CropTrigger[] cropTriggers = FindObjectsOfType<CropTrigger>();
@@ -46,6 +48,7 @@ public class CropDestroy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inTrigger = false;
+            textObj.SetActive(false);
             Debug.Log("Player exited trigger box.");
         }
     }

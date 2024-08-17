@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     public int foodAmount = 0; // New field for food amount
     
     [SerializeField] private TextMeshProUGUI seedDisplay;
-    [SerializeField] private TextMeshProUGUI toolDisplay;
+    //[SerializeField] private TextMeshProUGUI toolDisplay;
     [SerializeField] private TextMeshProUGUI coinDisplay;
     [SerializeField] private TextMeshProUGUI foodDisplay; // New UI element for food display
     [SerializeField] private ToolManager toolManager;
@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
     private void UpdateInventoryDisplay()
     {
         UpdateSeedDisplay();
-        UpdateToolDisplay();
+        //UpdateToolDisplay();
         UpdateCoinDisplay();
         UpdateFoodDisplay(); // Update food display
     }
@@ -86,7 +86,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    private void UpdateToolDisplay()
+    /*private void UpdateToolDisplay()
     {
         if (toolManager != null && toolDisplay != null)
         {
@@ -97,7 +97,7 @@ public class PlayerInventory : MonoBehaviour
         {
             toolDisplay.SetText("Tool: No tool equipped");
         }
-    }
+    }*/
 
     private void UpdateCoinDisplay()
     {

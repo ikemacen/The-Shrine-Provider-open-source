@@ -5,6 +5,7 @@ public class CropTrigger : MonoBehaviour
     public GameObject[] cropPrefabs; // Array of crop prefabs to instantiate
     public Transform spawnPoint; // The location where the crop will spawn
     public KeyCode plantKey = KeyCode.E; // The key used to plant the crop
+    public GameObject gameOb;
 
     private bool playerInTrigger = false; // Flag to check if player is in the trigger box
     private GameObject player; // Reference to the player object
@@ -18,6 +19,7 @@ public class CropTrigger : MonoBehaviour
             playerInTrigger = true;
             player = other.gameObject;
             Debug.Log("Player entered trigger box. Press 'E' to plant.");
+            gameOb.SetActive(true);
         }
     }
 
@@ -28,6 +30,7 @@ public class CropTrigger : MonoBehaviour
             playerInTrigger = false;
             player = null;
             Debug.Log("Player exited trigger box.");
+            gameOb.SetActive(false);
         }
     }
 
