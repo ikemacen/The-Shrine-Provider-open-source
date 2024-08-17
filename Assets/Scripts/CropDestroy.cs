@@ -4,8 +4,14 @@ using TMPro;
 public class CropDestroy : MonoBehaviour
 {
     public TextMeshPro countdownText; // Reference to the TextMeshPro component to clear text
+    public int coinReward = 10;
+    public int foodReward = 10;
     private bool inTrigger;
     private CropTrigger cropTrigger;
+    private PlayerInventory playerInventory;
+    private void Start(){
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -53,6 +59,10 @@ public class CropDestroy : MonoBehaviour
                 Destroy(cropTrigger.currentCrop);
                 cropTrigger.currentCrop = null;
                 Debug.Log("Crop destroyed. Replanting is allowed.");
+                if(playerInventory!= null){
+                    playerInventory.AddCoins(coinReward);
+                    playerInventory.AddFood(foodReward);
+                }
             }
             else
             {

@@ -1,45 +1,124 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<string> heldSeeds = new List<string>(); // List of crop seeds the player is holding
-    public int selectedSeedIndex = 0; // Index of the currently selected seed
+    public List<string> heldSeeds = new List<string>();
+    public int selectedSeedIndex = 0;
+    public int coinBalance = 100;
+    public int foodAmount = 0; // New field for food amount
+    
+    [SerializeField] private TextMeshProUGUI seedDisplay;
+    [SerializeField] private TextMeshProUGUI toolDisplay;
+    [SerializeField] private TextMeshProUGUI coinDisplay;
+    [SerializeField] private TextMeshProUGUI foodDisplay; // New UI element for food display
+    [SerializeField] private ToolManager toolManager;
+
+    void Start()
+    {
+        UpdateInventoryDisplay();
+    }
 
     void Update()
     {
-        // Switch seeds using number keys (1, 2, 3, ...)
         for (int i = 0; i < heldSeeds.Count; i++)
         {
-            if (Input.GetKeyDown((KeyCode) (KeyCode.Alpha1 + i)))
+            if (Input.GetKeyDown((KeyCode)(KeyCode.Alpha1 + i)))
             {
                 selectedSeedIndex = i;
-                Debug.Log("Selected seed: " + GetCurrentSeed());
+                UpdateSeedDisplay();
                 break;
             }
         }
     }
 
-    // Method to get the currently selected seed
     public string GetCurrentSeed()
     {
-        if (heldSeeds.Count > 0 && selectedSeedIndex < heldSeeds.Count)
-        {
-            return heldSeeds[selectedSeedIndex];
-        }
-        return string.Empty;
+        return (heldSeeds.Count > 0 && selectedSeedIndex < heldSeeds.Count) 
+            ? heldSeeds[selectedSeedIndex] 
+            : "No seeds selected";
     }
 
-    // Method to add a new seed to the inventory
     public void AddSeed(string seedName)
     {
         heldSeeds.Add(seedName);
+        selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, heldSeeds.Count - 1);
+        UpdateSeedDisplay();
     }
 
-    // Method to clear the held seeds (optional)
+    public void AddCoins(int amount)
+    {
+        coinBalance += amount;
+        UpdateCoinDisplay();
+    }
+
+    public bool SpendCoins(int amount)
+    {
+        if (coinBalance >= amount)
+        {
+            coinBalance -= amount;
+            UpdateCoinDisplay();
+            return true;
+        }
+        return false;
+    }
+
+    public void AddFood(int amount)
+    {
+        foodAmount += amount;
+        UpdateFoodDisplay();
+    }
+
+    private void UpdateInventoryDisplay()
+    {
+        UpdateSeedDisplay();
+        UpdateToolDisplay();
+        UpdateCoinDisplay();
+        UpdateFoodDisplay(); // Update food display
+    }
+
+    private void UpdateSeedDisplay()
+    {
+        if (seedDisplay != null)
+        {
+            seedDisplay.SetText("Seed: " + GetCurrentSeed());
+        }
+    }
+
+    private void UpdateToolDisplay()
+    {
+        if (toolManager != null && toolDisplay != null)
+        {
+            string toolName = toolManager.GetCurrentToolName() ?? "No tool equipped";
+            toolDisplay.SetText("Tool: " + toolName);
+        }
+        else if (toolDisplay != null)
+        {
+            toolDisplay.SetText("Tool: No tool equipped");
+        }
+    }
+
+    private void UpdateCoinDisplay()
+    {
+        if (coinDisplay != null)
+        {
+            coinDisplay.SetText("Coins: " + coinBalance);
+        }
+    }
+
+    private void UpdateFoodDisplay()
+    {
+        if (foodDisplay != null)
+        {
+            foodDisplay.SetText("Food: " + foodAmount);
+        }
+    }
+
     public void ClearSeeds()
     {
         heldSeeds.Clear();
         selectedSeedIndex = 0;
+        UpdateSeedDisplay();
     }
 }
