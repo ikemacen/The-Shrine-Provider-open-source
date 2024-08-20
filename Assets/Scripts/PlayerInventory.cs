@@ -2,27 +2,37 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 
+[System.Serializable]
+public class SeedType
+{
+    public string seedName;
+    public int seedAmount;
+}
+
 public class PlayerInventory : MonoBehaviour
 {
-    public List<string> heldSeeds = new List<string>();
+    public List<SeedType> seedTypes = new List<SeedType>(); // List to hold seed types and amounts
     public int selectedSeedIndex = 0;
     public int coinBalance = 100;
-    public int foodAmount = 0; // New field for food amount
+    public int foodAmount = 0; 
     
     [SerializeField] private TextMeshProUGUI seedDisplay;
-    //[SerializeField] private TextMeshProUGUI toolDisplay;
     [SerializeField] private TextMeshProUGUI coinDisplay;
-    [SerializeField] private TextMeshProUGUI foodDisplay; // New UI element for food display
+    [SerializeField] private TextMeshProUGUI foodDisplay; 
     [SerializeField] private ToolManager toolManager;
+
+    private Dictionary<string, int> seedCounts = new Dictionary<string, int>(); // Internal dictionary to track seed counts
+    private List<string> seedNames = new List<string>();
 
     void Start()
     {
+        InitializeSeedCounts(); // Initialize seed counts from the serialized list
         UpdateInventoryDisplay();
     }
 
     void Update()
     {
-        for (int i = 0; i < heldSeeds.Count; i++)
+        for (int i = 0; i < seedNames.Count; i++)
         {
             if (Input.GetKeyDown((KeyCode)(KeyCode.Alpha1 + i)))
             {
@@ -35,16 +45,45 @@ public class PlayerInventory : MonoBehaviour
 
     public string GetCurrentSeed()
     {
-        return (heldSeeds.Count > 0 && selectedSeedIndex < heldSeeds.Count) 
-            ? heldSeeds[selectedSeedIndex] 
+        return (seedNames.Count > 0 && selectedSeedIndex < seedNames.Count) 
+            ? seedNames[selectedSeedIndex] 
             : "No seeds selected";
     }
 
-    public void AddSeed(string seedName)
+    public int GetCurrentSeedCount()
     {
-        heldSeeds.Add(seedName);
-        selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, heldSeeds.Count - 1);
+        string currentSeed = GetCurrentSeed();
+        return seedCounts.ContainsKey(currentSeed) ? seedCounts[currentSeed] : 0;
+    }
+
+    public void AddSeed(string seedName, int amount = 1)
+    {
+        if (seedCounts.ContainsKey(seedName))
+        {
+            seedCounts[seedName] += amount;
+        }
+        else
+        {
+            seedCounts.Add(seedName, amount);
+            seedNames.Add(seedName);
+        }
+        selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, seedNames.Count - 1);
         UpdateSeedDisplay();
+    }
+
+    public void RemoveSeed(string seedName, int amount = 1)
+    {
+        if (seedCounts.ContainsKey(seedName))
+        {
+            seedCounts[seedName] -= amount;
+            if (seedCounts[seedName] <= 0)
+            {
+                seedCounts.Remove(seedName);
+                seedNames.Remove(seedName);
+            }
+            selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, seedNames.Count - 1);
+            UpdateSeedDisplay();
+        }
     }
 
     public void AddCoins(int amount)
@@ -73,31 +112,19 @@ public class PlayerInventory : MonoBehaviour
     private void UpdateInventoryDisplay()
     {
         UpdateSeedDisplay();
-        //UpdateToolDisplay();
         UpdateCoinDisplay();
-        UpdateFoodDisplay(); // Update food display
+        UpdateFoodDisplay(); 
     }
 
     private void UpdateSeedDisplay()
     {
         if (seedDisplay != null)
         {
-            seedDisplay.SetText("Seed: " + GetCurrentSeed());
+            string currentSeed = GetCurrentSeed();
+            int currentSeedCount = GetCurrentSeedCount();
+            seedDisplay.SetText($"Seed: {currentSeed} ({currentSeedCount})");
         }
     }
-
-    /*private void UpdateToolDisplay()
-    {
-        if (toolManager != null && toolDisplay != null)
-        {
-            string toolName = toolManager.GetCurrentToolName() ?? "No tool equipped";
-            toolDisplay.SetText("Tool: " + toolName);
-        }
-        else if (toolDisplay != null)
-        {
-            toolDisplay.SetText("Tool: No tool equipped");
-        }
-    }*/
 
     private void UpdateCoinDisplay()
     {
@@ -117,8 +144,21 @@ public class PlayerInventory : MonoBehaviour
 
     public void ClearSeeds()
     {
-        heldSeeds.Clear();
+        seedCounts.Clear();
+        seedNames.Clear();
         selectedSeedIndex = 0;
         UpdateSeedDisplay();
+    }
+
+    private void InitializeSeedCounts()
+    {
+        foreach (SeedType seedType in seedTypes)
+        {
+            if (!seedCounts.ContainsKey(seedType.seedName))
+            {
+                seedCounts.Add(seedType.seedName, seedType.seedAmount);
+                seedNames.Add(seedType.seedName);
+            }
+        }
     }
 }
