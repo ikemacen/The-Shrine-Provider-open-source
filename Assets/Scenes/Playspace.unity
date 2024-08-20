@@ -3753,7 +3753,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1125678621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4095,6 +4107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1765a7a3c6c147ae410b72102caa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   timerText: {fileID: 1304551235}
   remainingTime: 600
 --- !u!114 &1304551235
@@ -4550,9 +4563,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8657e4b177484f85b8d321992858362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldSeeds:
-  - Tomato Crop
-  - Wheat Crop
+  seedTypes:
+  - seedName: Tomato Crop
+    seedAmount: 2
+  - seedName: Wheat Crop
+    seedAmount: 2
   selectedSeedIndex: 0
   coinBalance: 100
   foodAmount: 0

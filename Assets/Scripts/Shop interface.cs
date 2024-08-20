@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface Shopinterface 
 {
-    void Boughtitem(Items.Itemtype itemtype); //interface used for buying items in the shop
+    void Boughtitem(Items.Itemtype itemtype);
+    void AddSeed(string seedName, int amount);
+    bool SpendCoins(int amount);
 }
