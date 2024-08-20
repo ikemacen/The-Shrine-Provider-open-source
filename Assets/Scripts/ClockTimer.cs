@@ -5,6 +5,7 @@ using TMPro;
 
 public class ClockTimer : MonoBehaviour
 {
+    public GameObject gameOver;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;
 
@@ -18,6 +19,8 @@ public class ClockTimer : MonoBehaviour
         {
             remainingTime = 0;
             //GameOver
+            gameOver.SetActive(true);
+            Time.timeScale = 0f;
         }
         
         int minutes = Mathf.FloorToInt (remainingTime / 60);
