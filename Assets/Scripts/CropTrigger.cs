@@ -5,7 +5,7 @@ public class CropTrigger : MonoBehaviour
     public GameObject[] cropPrefabs; // Array of crop prefabs to instantiate
     public Transform spawnPoint; // The location where the crop will spawn
     public KeyCode plantKey = KeyCode.E; // The key used to plant the crop
-    public GameObject gameOb;
+    public GameObject gameOb; // UI or indicator object to activate when the player is in the trigger
 
     private bool playerInTrigger = false; // Flag to check if player is in the trigger box
     private GameObject player; // Reference to the player object
@@ -81,18 +81,30 @@ public class CropTrigger : MonoBehaviour
 
             if (selectedCropPrefab != null)
             {
-                currentCrop = Instantiate(selectedCropPrefab, spawnPoint.position, spawnPoint.rotation);
-                CropGrowth cropGrowth = currentCrop.GetComponent<CropGrowth>();
-
-                if (cropGrowth != null)
+                // Check if the player has enough seeds
+                if (playerInventory.GetCurrentSeedCount() > 0)
                 {
-                    cropGrowth.StartGrowing();
-                    canPlant = false; // Disable planting until crop is destroyed
-                    Debug.Log("Crop planted. Planting disabled until crop is destroyed.");
+                    // Reduce the seed count by 1
+                    playerInventory.RemoveSeed(selectedSeed, 1);
+
+                    // Instantiate the crop
+                    currentCrop = Instantiate(selectedCropPrefab, spawnPoint.position, spawnPoint.rotation);
+                    CropGrowth cropGrowth = currentCrop.GetComponent<CropGrowth>();
+
+                    if (cropGrowth != null)
+                    {
+                        cropGrowth.StartGrowing();
+                        canPlant = false; // Disable planting until crop is destroyed
+                        Debug.Log("Crop planted. Planting disabled until crop is destroyed.");
+                    }
+                    else
+                    {
+                        Debug.LogError("CropGrowth script not found on instantiated crop.");
+                    }
                 }
                 else
                 {
-                    Debug.LogError("CropGrowth script not found on instantiated crop.");
+                    Debug.LogWarning("Not enough seeds to plant.");
                 }
             }
             else

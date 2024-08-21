@@ -21,24 +21,56 @@ public class Shop : MonoBehaviour
     {
         CreateItembutton("none", Items.GetCost(Items.Itemtype.none), 0);
         CreateItembutton("pitchfork", Items.GetCost(Items.Itemtype.Pitchfork), 1);
+        CreateItembutton("Tomato Crop", Items.GetCost(Items.Itemtype.TomatoCrop), 2);
+        CreateItembutton("Wheat Crop", Items.GetCost(Items.Itemtype.WheatCrop), 3);
 
         Hide();
     }
 
 
-    private void CreateItembutton(string itemname, int itemcost, int PostionIndex) //creates istance of templates for every item stored in items with thier prices for the shop UI
+    private void CreateItembutton(string itemName, int itemCost, int positionIndex)
     {
-        Transform shopitemTransform = Instantiate(Shopitem, Contianer);
-        shopitemTransform.gameObject.SetActive(true);
-        RectTransform shopitemRectTransform = shopitemTransform.GetComponent<RectTransform>();
+        Transform shopItemTransform = Instantiate(Shopitem, Contianer);
+        shopItemTransform.gameObject.SetActive(true);
+        RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
 
-        float shopitemheight = 160f;
-        shopitemRectTransform.anchoredPosition = new Vector2(0, -shopitemheight * PostionIndex);
+        float shopItemHeight = 160f;
+        shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
-        shopitemTransform.Find("shopitem name").GetComponent<TextMeshProUGUI>().SetText(itemname);
-        shopitemTransform.Find("shopitem cost").GetComponent<TextMeshProUGUI>().SetText(itemcost.ToString());
+        TextMeshProUGUI nameText = shopItemTransform.Find("shopitem name").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI costText = shopItemTransform.Find("shopitem cost").GetComponent<TextMeshProUGUI>();
+        Button button = shopItemTransform.GetComponent<Button>();
+
+        nameText.SetText(itemName);
+        costText.SetText(itemCost.ToString());
+
+        button.onClick.RemoveAllListeners(); // Clear existing listeners
+        button.onClick.AddListener(() => PurchaseItem(itemName, itemCost)); // Add new listener
     }
-    
+
+    private void PurchaseItem(string itemName, int itemCost)
+    {
+        if (playershoper.SpendCoins(itemCost))
+        {
+            // Assuming you have some way to map itemName to Itemtype
+            Items.Itemtype itemType = GetItemTypeByName(itemName);
+
+            if (itemType.ToString().Contains("Crop"))
+            {
+                // This adds seeds to the player's inventory
+                playershoper.AddSeed(itemName, 1);
+            }
+            else
+            {
+                // Handle other item types if needed
+                playershoper.Boughtitem(itemType);
+            }
+        }
+        else
+        {
+            Debug.Log("Not enough coins to purchase " + itemName);
+        }
+    }
 
     private void itempurchase(Items.Itemtype itemtype) // actives the interface and allows the player to buy the item
     {
@@ -55,5 +87,15 @@ public class Shop : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    private Items.Itemtype GetItemTypeByName(string itemName)
+    {
+        switch (itemName)
+        {
+            case "Tomato Crop": return Items.Itemtype.TomatoCrop;
+            case "Wheat Crop": return Items.Itemtype.WheatCrop;
+            // Add other mappings as needed
+            default: return Items.Itemtype.none;
+        }
+    }   
 
 }
