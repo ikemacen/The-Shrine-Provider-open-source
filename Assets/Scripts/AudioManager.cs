@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+    }
+    public void Start(){
+        Play("Theme");
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame
@@ -56,5 +61,16 @@ public class AudioManager : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(startIndex, endIndex + 1);
         Sound s = sounds[randomIndex];
         s.source.Play();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(scene.name == "Menu"){
+            Stop("Theme");
+        }else if(scene.name == "Playspace"){
+            Play("Theme");
+        }
+    }
+    void OnDestroy(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

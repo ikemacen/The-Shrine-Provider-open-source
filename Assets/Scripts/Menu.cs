@@ -5,10 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void MenuLoad(string lvl){
-    SceneManager.LoadScene(lvl);
+    [SerializeField] GameObject settingMenu;
+
+    [SerializeField] GameObject MainMenu;
+
+    public void MenuLoad(string lvl)
+    {
+        SceneManager.LoadScene(lvl);
     }
-    public void QuitGame(){
-    Application.Quit();
+
+    public void SettingMenu()
+    {
+        MainMenu.SetActive(false);
+        settingMenu.SetActive(true);
+    }
+
+    public void ExitSettingMenu()
+    {
+        settingMenu.SetActive(false);
+        MainMenu.SetActive(true);
+    }
+
+
+    public void QuitGame() 
+    {
+        Application.Quit();
     }
 }
