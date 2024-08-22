@@ -19,10 +19,10 @@ public class Shop : MonoBehaviour
 
     private void Start()//Creates the item buttons in the shop useing the CreateItembutton class for it's template and setup from decending order
     {
-        CreateItembutton("none", Items.GetCost(Items.Itemtype.none), 0);
-        CreateItembutton("pitchfork", Items.GetCost(Items.Itemtype.Pitchfork), 1);
-        CreateItembutton("Tomato Crop", Items.GetCost(Items.Itemtype.TomatoCrop), 2);
-        CreateItembutton("Wheat Crop", Items.GetCost(Items.Itemtype.WheatCrop), 3);
+        CreateItembutton("Tomato Crop", Items.GetCost(Items.Itemtype.TomatoCrop), 0);
+        CreateItembutton("Wheat Crop", Items.GetCost(Items.Itemtype.WheatCrop), 1);
+        CreateItembutton("Carrot Crop", Items.GetCost(Items.Itemtype.CarrotCrop), 2);
+        CreateItembutton("Corn Crop", Items.GetCost(Items.Itemtype.CornCrop), 3);
 
         Hide();
     }
@@ -93,6 +93,8 @@ public class Shop : MonoBehaviour
         {
             case "Tomato Crop": return Items.Itemtype.TomatoCrop;
             case "Wheat Crop": return Items.Itemtype.WheatCrop;
+            case "Carrot Crop": return Items.Itemtype.CarrotCrop;
+            case "Corn Crop": return Items.Itemtype.CornCrop;
             // Add other mappings as needed
             default: return Items.Itemtype.none;
         }
