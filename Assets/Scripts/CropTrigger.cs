@@ -11,10 +11,42 @@ public class CropTrigger : MonoBehaviour
     private GameObject player; // Reference to the player object
     public bool canPlant = true; // Flag to check if planting is allowed
     public GameObject currentCrop; // Reference to the currently planted crop
+    private Collider cropCollider;
+     private ToolManager toolManager;
 
+    private void Start()
+    {
+        cropCollider = GetComponent<Collider>();
+        if (cropCollider != null)
+        {
+            cropCollider.enabled = false; // Disable the collider at the start
+        }
+        toolManager = FindObjectOfType<ToolManager>();
+        if (toolManager == null)
+        {
+            Debug.LogError("ToolManager not found in the scene.");
+        }
+    }
+    public void EnableTrigger()
+    {
+        if (cropCollider != null)
+        {
+            cropCollider.enabled = true;
+            Debug.Log("CropTrigger enabled at: " + transform.position);
+        }
+    }
+    public void DisableTrigger()
+    {
+        if (cropCollider != null)
+        {
+            cropCollider.enabled = false;
+            Debug.Log("CropTrigger disabled at: " + transform.position);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        GameObject currentTool = toolManager.GetCurrentTool();
+        if (other.CompareTag("Player") && currentTool.GetComponent<SeedPouch>() != null)
         {
             playerInTrigger = true;
             player = other.gameObject;
@@ -36,9 +68,12 @@ public class CropTrigger : MonoBehaviour
 
     private void Update()
     {
+        GameObject currentTool = toolManager.GetCurrentTool();
         if (playerInTrigger && canPlant && Input.GetKeyDown(plantKey))
         {
-            PlantCrop();
+            if(currentTool.GetComponent<SeedPouch>() != null){
+                PlantCrop();
+            }
         }
 
         // Allow replanting if the crop has been destroyed
@@ -117,8 +152,12 @@ public class CropTrigger : MonoBehaviour
     // Public method to be called by CropDestroy
     public void OnCropDestroyed()
     {
+        DisableTrigger();
         currentCrop = null;
         canPlant = true;
+        player = null;
+        playerInTrigger = false;
+        gameOb.SetActive(false);
         Debug.Log("Crop destroyed. Replanting is allowed.");
     }
 }

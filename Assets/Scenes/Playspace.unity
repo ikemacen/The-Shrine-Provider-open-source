@@ -2743,7 +2743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &705387831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5523,6 +5523,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6872216057938486315, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
   m_PrefabInstance: {fileID: 1372831510}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1378738262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5214850463183859463, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+  m_PrefabInstance: {fileID: 1568137205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1378738264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378738262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe509b035a704cc794c9fb25ac7277c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1397276562
 GameObject:
   m_ObjectHideFlags: 0
@@ -6582,6 +6599,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1722856446}
     m_Modifications:
+    - target: {fileID: 2221363789780105398, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0651524
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221363789780105398, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+      propertyPath: m_Center.y
+      value: 0.53257537
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221363789780105398, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4424949152865942928, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
       propertyPath: m_Name
       value: TriggerBoxGrowth (10)
@@ -6653,7 +6682,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5214850463183859463, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378738264}
   m_SourcePrefab: {fileID: 100100000, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
 --- !u!1 &1568137206 stripped
 GameObject:
@@ -8956,6 +8988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Seed Bag
       objectReference: {fileID: 0}
+    - target: {fileID: 8995594580856380277, guid: 105e0de6bece64c5590af0bb1812a481, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 1347988143}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
