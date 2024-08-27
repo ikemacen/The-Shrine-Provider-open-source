@@ -6,6 +6,7 @@ public class TownCropBox : MonoBehaviour
 {
     //--objects--
     public GameObject cropBox;
+    public GameObject cropText;
 
     //--scripts--
     public Threshold threshold;
@@ -23,6 +24,7 @@ public class TownCropBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InTrigger = true;
+            cropText.SetActive(true);
             Debug.Log("Player entered Trigger Box.");
         }
     }
@@ -32,6 +34,7 @@ public class TownCropBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InTrigger = false;
+            cropText.SetActive(false);
             Debug.Log("Player exited Trigger Box.");
         }
     }

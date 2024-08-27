@@ -6,7 +6,7 @@ public class PersonalCropBox : MonoBehaviour
 {
     //--objects--
     public GameObject cropBox;
-
+    public GameObject personalText;
     //--scripts--
     public TimerScript timer;
 
@@ -26,6 +26,7 @@ public class PersonalCropBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InTrigger = true;
+            personalText.SetActive(true);
             Debug.Log("Player entered Trigger Box.");
         }
     }
@@ -35,6 +36,7 @@ public class PersonalCropBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InTrigger = false;
+            personalText.SetActive(false);
             Debug.Log("Player exited Trigger Box.");
         }
     }
