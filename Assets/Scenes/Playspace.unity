@@ -1019,7 +1019,19 @@ MonoBehaviour:
     source: {fileID: 0}
     loop: 0
   - name: Harvest
-    clip: {fileID: 8300000, guid: 2167acfed398c4868a734fa67dffa072, type: 3}
+    clip: {fileID: 8300000, guid: 4e4008c280b5a499c9043738418d127c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Bag
+    clip: {fileID: 8300000, guid: 671537d3a1d0f4f2294255f00c5918f1, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Plant
+    clip: {fileID: 8300000, guid: e18369b8b808d4296b50744e515c126d, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
@@ -7073,6 +7085,10 @@ PrefabInstance:
       propertyPath: cropPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 809331753352373186, guid: ff687cc0305fe4b21bb25da9df89abda, type: 3}
+    - target: {fileID: 5397754111244848855, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+      propertyPath: gObj
+      value: 
+      objectReference: {fileID: 1866037365}
     - target: {fileID: 6872216057938486315, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8504,6 +8520,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 136059043}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1866037365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4424949152865942928, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
+  m_PrefabInstance: {fileID: 1568137205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867875385
 GameObject:
   m_ObjectHideFlags: 0

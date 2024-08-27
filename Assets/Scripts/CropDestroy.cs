@@ -10,8 +10,10 @@ public class CropDestroy : MonoBehaviour
     private CropTrigger cropTrigger;
     private PlayerInventory playerInventory;
     public GameObject textObj;
+    private AudioManager audioManager;
     private void Start(){
         playerInventory = FindAnyObjectByType<PlayerInventory>();
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,6 +68,7 @@ public class CropDestroy : MonoBehaviour
                     playerInventory.AddCoins(coinReward);
                     playerInventory.AddFood(foodReward);
                 }
+                audioManager.Play("Harvest");
             }
             else
             {

@@ -12,8 +12,8 @@ public class CropTrigger : MonoBehaviour
     public bool canPlant = true; // Flag to check if planting is allowed
     public GameObject currentCrop; // Reference to the currently planted crop
     private Collider cropCollider;
-     private ToolManager toolManager;
-
+    private ToolManager toolManager;
+    private AudioManager audioManager;
     private void Start()
     {
         cropCollider = GetComponent<Collider>();
@@ -25,6 +25,10 @@ public class CropTrigger : MonoBehaviour
         if (toolManager == null)
         {
             Debug.LogError("ToolManager not found in the scene.");
+        }
+        audioManager = FindAnyObjectByType<AudioManager>();
+        if (audioManager == null){
+            Debug.LogError("AudioManager Not Here");
         }
     }
     public void EnableTrigger()
@@ -73,6 +77,7 @@ public class CropTrigger : MonoBehaviour
         {
             if(currentTool.GetComponent<SeedPouch>() != null){
                 PlantCrop();
+                audioManager.Play("Plant");
             }
         }
 

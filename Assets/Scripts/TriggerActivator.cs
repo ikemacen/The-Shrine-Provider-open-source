@@ -3,13 +3,18 @@ using UnityEngine;
 public class TriggerActivator : MonoBehaviour
 {
     private ToolManager toolManager; // Reference to the ToolManager
+    private AudioManager audioManager;
 
     private void Start()
     {
-        toolManager = FindObjectOfType<ToolManager>();
+        toolManager = FindAnyObjectByType<ToolManager>();
         if (toolManager == null)
         {
             Debug.LogError("ToolManager not found in the scene.");
+        }
+        audioManager = FindAnyObjectByType<AudioManager>();
+        if(audioManager == null){
+            Debug.LogError("AudioManager Missing");
         }
     }
 
@@ -33,6 +38,7 @@ public class TriggerActivator : MonoBehaviour
         if (cropTrigger != null)
         {
             cropTrigger.EnableTrigger();
+            audioManager.Play("Water");
             Debug.Log("Enabled CropTrigger on parent object.");
         }
         else
