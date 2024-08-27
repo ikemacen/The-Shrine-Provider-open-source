@@ -13,7 +13,10 @@ public class TownCropBox : MonoBehaviour
     //--variables--
     public float nutrition = 10f;
     bool InTrigger;
-    
+    private PlayerInventory playerInventory;
+    private void Start(){
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -35,10 +38,11 @@ public class TownCropBox : MonoBehaviour
 
     void Update()
     {
-        if (InTrigger && Input.GetKeyDown(KeyCode.E))
+        if (InTrigger && Input.GetKeyDown(KeyCode.E)&&playerInventory.foodAmount>0)
         {
             threshold.amountThreshold += nutrition;
             Debug.Log(threshold.startThreshold.maxValue);
+            playerInventory.RemoveFood((int)nutrition);
         }
     }
 }
