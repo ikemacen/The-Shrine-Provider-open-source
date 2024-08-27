@@ -38,7 +38,7 @@ public class TownCropBox : MonoBehaviour
 
     void Update()
     {
-        if (InTrigger && Input.GetKeyDown(KeyCode.E)&&playerInventory.foodAmount>0)
+        if (InTrigger && Input.GetKeyDown(KeyCode.E)&&playerInventory.foodAmount>=nutrition)
         {
             threshold.amountThreshold += nutrition;
             Debug.Log(threshold.startThreshold.maxValue);
