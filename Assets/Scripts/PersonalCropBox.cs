@@ -14,11 +14,13 @@ public class PersonalCropBox : MonoBehaviour
     public float nutrition = 10f;
     bool InTrigger;
     private PlayerInventory playerInventory;
+    private AudioManager audioManager;
     private void Start(){
         playerInventory = FindAnyObjectByType<PlayerInventory>();
         if (playerInventory == null){
             Debug.LogError("Player Inventory not found");
         }
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -50,6 +52,7 @@ public class PersonalCropBox : MonoBehaviour
                 timer.amountTimer += nutrition;
                 Debug.Log(timer.startTimer.maxValue);
                 playerInventory.RemoveFood((int)nutrition);
+                audioManager.Play("Box2");
             } 
         }
     }

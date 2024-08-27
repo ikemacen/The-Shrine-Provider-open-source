@@ -15,8 +15,10 @@ public class TownCropBox : MonoBehaviour
     public float nutrition = 10f;
     bool InTrigger;
     private PlayerInventory playerInventory;
+    private AudioManager audioManager;
     private void Start(){
         playerInventory = FindAnyObjectByType<PlayerInventory>();
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -46,6 +48,7 @@ public class TownCropBox : MonoBehaviour
             threshold.amountThreshold += nutrition;
             Debug.Log(threshold.startThreshold.maxValue);
             playerInventory.RemoveFood((int)nutrition);
+            audioManager.Play("Box1");
         }
     }
 }

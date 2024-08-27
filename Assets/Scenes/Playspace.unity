@@ -1036,6 +1036,18 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 0
+  - name: Box1
+    clip: {fileID: 8300000, guid: 7b869e9bf209c4da5915cbd6d1ccea27, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Box2
+    clip: {fileID: 8300000, guid: ee716c7be47694dd6a7f0a1f02932ad2, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
 --- !u!4 &260255267
 Transform:
   m_ObjectHideFlags: 0
@@ -6413,7 +6425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1469835165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7085,10 +7097,6 @@ PrefabInstance:
       propertyPath: cropPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 809331753352373186, guid: ff687cc0305fe4b21bb25da9df89abda, type: 3}
-    - target: {fileID: 5397754111244848855, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
-      propertyPath: gObj
-      value: 
-      objectReference: {fileID: 1866037365}
     - target: {fileID: 6872216057938486315, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8520,11 +8528,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 136059043}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &1866037365 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4424949152865942928, guid: 9c751a9172cea4241be1cd3c9c8224d0, type: 3}
-  m_PrefabInstance: {fileID: 1568137205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867875385
 GameObject:
   m_ObjectHideFlags: 0
