@@ -7,7 +7,7 @@ public class GameOver : MonoBehaviour
 {
     public void RestartButton()
     {
-        SceneManager.LoadScene("TestSceneBars");
+        SceneManager.LoadScene("Playspace");
         Time.timeScale = 1f;
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TimerScript : MonoBehaviour
 {
     public GameObject gameOver;
+    public GameObject gameOverText;
     public Slider startTimer;
     public float amountTimer;
     public bool stopTimer = false;
@@ -35,6 +36,7 @@ public class TimerScript : MonoBehaviour
             {
                 stopTimer = true;
                 gameOver.SetActive(true);
+                gameOverText.SetActive(true);
                 Time.timeScale = 0f;
             }
             if (stopTimer == false)
