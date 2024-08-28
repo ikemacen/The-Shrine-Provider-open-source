@@ -50,6 +50,16 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Stop();
     }
+    public bool IsPlaying(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return false;
+        }
+        return s.source.isPlaying;
+    }
     public void PlayRandomSoundFromRange(int startIndex, int endIndex)
     {
         if (startIndex < 0 || endIndex >= sounds.Length || startIndex > endIndex)

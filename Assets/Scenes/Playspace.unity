@@ -1048,6 +1048,24 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 0
+  - name: Button
+    clip: {fileID: 8300000, guid: 573f2a700e0864e18b66f17af4349cce, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Walking
+    clip: {fileID: 8300000, guid: c2d6b549302604d0b9c4fa9fbf5a344c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Bucket
+    clip: {fileID: 8300000, guid: 65416c07f8d454dd79d75f25521a8ab9, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
 --- !u!4 &260255267
 Transform:
   m_ObjectHideFlags: 0

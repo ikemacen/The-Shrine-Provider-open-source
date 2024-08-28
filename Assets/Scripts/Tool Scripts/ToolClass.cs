@@ -32,7 +32,7 @@ public class ToolClass : MonoBehaviour
     public virtual void PickupAction() {
         Debug.Log("Picked up tool: " + this.gameObject.name);
         if(this.gameObject.name == "Watering Can"){
-            audioManager.Play("Water");
+            audioManager.Play("Bucket");
         }
         if(this.gameObject.name == "Seed Bag"){
             audioManager.Play("Bag");

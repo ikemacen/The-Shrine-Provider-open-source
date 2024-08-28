@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
     private Transform Contianer;
     private Transform Shopitem;
     private Shopinterface playershoper;
+    private AudioManager audioManager;
 
     private void Awake() //sets up the layout of the shop and makes it hidden when starting the game
     {
@@ -25,6 +26,7 @@ public class Shop : MonoBehaviour
         CreateItembutton("Corn Crop", Items.GetCost(Items.Itemtype.CornCrop), 3);
 
         Hide();
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
 
@@ -59,6 +61,7 @@ public class Shop : MonoBehaviour
             {
                 // This adds seeds to the player's inventory
                 playershoper.AddSeed(itemName, 1);
+                audioManager.Play("Button");
             }
             else
             {
