@@ -85,7 +85,6 @@ public class CropTrigger : MonoBehaviour
         if (currentCrop == null)
         {
             canPlant = true;
-            Debug.Log("Current crop is null. Replanting is allowed.");
         }
     }
 
