@@ -7,6 +7,7 @@ public class Threshold : MonoBehaviour
 {
     public Slider startThreshold;
     public float amountThreshold = 0f;
+    public bool IsFed = false;
 
     void Start()
     {
@@ -18,11 +19,12 @@ public class Threshold : MonoBehaviour
     {
         if (startThreshold.maxValue < amountThreshold)
         {
+            IsFed = true;
             startThreshold.maxValue *= 2f;
             amountThreshold = 0f;
-        } 
+        }
         else 
-        { 
+        {
             startThreshold.value = amountThreshold;
         }
     }

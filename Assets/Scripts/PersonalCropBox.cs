@@ -6,20 +6,29 @@ public class PersonalCropBox : MonoBehaviour
 {
     //--objects--
     public GameObject cropBox;
-
+    public GameObject personalText;
     //--scripts--
     public TimerScript timer;
 
     //--variables--
     public float nutrition = 10f;
     bool InTrigger;
-    
+    private PlayerInventory playerInventory;
+    private AudioManager audioManager;
+    private void Start(){
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
+        if (playerInventory == null){
+            Debug.LogError("Player Inventory not found");
+        }
+        audioManager = FindAnyObjectByType<AudioManager>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             InTrigger = true;
+            personalText.SetActive(true);
             Debug.Log("Player entered Trigger Box.");
         }
     }
@@ -29,6 +38,7 @@ public class PersonalCropBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InTrigger = false;
+            personalText.SetActive(false);
             Debug.Log("Player exited Trigger Box.");
         }
     }
@@ -41,6 +51,8 @@ public class PersonalCropBox : MonoBehaviour
             {
                 timer.amountTimer += nutrition;
                 Debug.Log(timer.startTimer.maxValue);
+                playerInventory.RemoveFood((int)nutrition);
+                audioManager.Play("Box2");
             } 
         }
     }

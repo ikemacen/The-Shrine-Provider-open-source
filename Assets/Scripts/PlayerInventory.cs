@@ -108,6 +108,12 @@ public class PlayerInventory : MonoBehaviour
         foodAmount += amount;
         UpdateFoodDisplay();
     }
+    public void RemoveFood(int amount){
+        if (foodAmount > 0){
+            foodAmount -= amount;
+            UpdateFoodDisplay();
+        }
+    }
 
     private void UpdateInventoryDisplay()
     {

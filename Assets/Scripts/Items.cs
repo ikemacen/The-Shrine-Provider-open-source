@@ -7,9 +7,10 @@ public class Items : MonoBehaviour
     public enum Itemtype //stores the vaules of the shop item names
     {
         none,
-        Pitchfork,
+        CarrotCrop,
         TomatoCrop,
-        WheatCrop
+        WheatCrop,
+        CornCrop
     }
 
     public static int GetCost(Itemtype itemtype) //stores the vaule of shop items prices
@@ -18,9 +19,10 @@ public class Items : MonoBehaviour
         {
             default:
             case Itemtype.none: return 0;
-            case Itemtype.Pitchfork: return 50;
+            case Itemtype.CarrotCrop: return 4;
             case Itemtype.TomatoCrop: return 1;
             case Itemtype.WheatCrop: return 2;
+            case Itemtype.CornCrop: return 3;
         }
     }
 }
