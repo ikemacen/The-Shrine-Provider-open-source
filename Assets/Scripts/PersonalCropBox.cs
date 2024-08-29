@@ -45,7 +45,7 @@ public class PersonalCropBox : MonoBehaviour
 
     void Update()
     {
-        if (InTrigger && Input.GetKeyDown(KeyCode.E))
+        if (InTrigger && Input.GetKeyDown(KeyCode.E)&&playerInventory.foodAmount >= nutrition)
         {
             if ((timer.startTimer.maxValue - timer.amountTimer) > nutrition)
             {
