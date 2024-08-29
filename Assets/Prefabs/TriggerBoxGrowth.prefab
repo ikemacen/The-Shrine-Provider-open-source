@@ -79,6 +79,7 @@ MonoBehaviour:
   gameOb: {fileID: 7213839832495744656}
   canPlant: 1
   currentCrop: {fileID: 0}
+  soilPath: {fileID: 5077683357716914508}
 --- !u!1 &5214850463183859463
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +438,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7ac5bdc576ae6c40a9162d947948654, type: 3}
+--- !u!1 &5077683357716914508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d7ac5bdc576ae6c40a9162d947948654, type: 3}
+  m_PrefabInstance: {fileID: 5383745274750180381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5565427353423805430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d7ac5bdc576ae6c40a9162d947948654, type: 3}

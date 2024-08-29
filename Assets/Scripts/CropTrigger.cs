@@ -14,6 +14,7 @@ public class CropTrigger : MonoBehaviour
     private Collider cropCollider;
     private ToolManager toolManager;
     private AudioManager audioManager;
+    public GameObject soilPath;
     private void Start()
     {
         cropCollider = GetComponent<Collider>();
@@ -30,12 +31,14 @@ public class CropTrigger : MonoBehaviour
         if (audioManager == null){
             Debug.LogError("AudioManager Not Here");
         }
+        soilPath.SetActive(false);
     }
     public void EnableTrigger()
     {
         if (cropCollider != null)
         {
             cropCollider.enabled = true;
+            soilPath.SetActive(true);
             Debug.Log("CropTrigger enabled at: " + transform.position);
         }
     }
@@ -44,6 +47,7 @@ public class CropTrigger : MonoBehaviour
         if (cropCollider != null)
         {
             cropCollider.enabled = false;
+            soilPath.SetActive(false);
             Debug.Log("CropTrigger disabled at: " + transform.position);
         }
     }
