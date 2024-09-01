@@ -10356,12 +10356,16 @@ MonoBehaviour:
   seedTypes:
   - seedName: Tomato Crop
     seedAmount: 2
+    keyBinding: 49
   - seedName: Wheat Crop
     seedAmount: 2
+    keyBinding: 50
   - seedName: Carrot Crop
     seedAmount: 2
+    keyBinding: 51
   - seedName: Corn Crop
     seedAmount: 2
+    keyBinding: 52
   selectedSeedIndex: 0
   coinBalance: 100
   foodAmount: 20

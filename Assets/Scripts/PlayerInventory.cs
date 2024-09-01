@@ -7,6 +7,7 @@ public class SeedType
 {
     public string seedName;
     public int seedAmount;
+    public KeyCode keyBinding; // Key to select this seed type
 }
 
 public class PlayerInventory : MonoBehaviour
@@ -14,15 +15,15 @@ public class PlayerInventory : MonoBehaviour
     public List<SeedType> seedTypes = new List<SeedType>(); // List to hold seed types and amounts
     public int selectedSeedIndex = 0;
     public int coinBalance = 100;
-    public int foodAmount = 0; 
-    
+    public int foodAmount = 0;
+
     [SerializeField] private TextMeshProUGUI seedDisplay;
     [SerializeField] private TextMeshProUGUI coinDisplay;
-    [SerializeField] private TextMeshProUGUI foodDisplay; 
+    [SerializeField] private TextMeshProUGUI foodDisplay;
     [SerializeField] private ToolManager toolManager;
 
     private Dictionary<string, int> seedCounts = new Dictionary<string, int>(); // Internal dictionary to track seed counts
-    private List<string> seedNames = new List<string>();
+    private Dictionary<KeyCode, string> keyToSeedMapping = new Dictionary<KeyCode, string>(); // Map keys to seed names
 
     void Start()
     {
@@ -32,21 +33,27 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < seedNames.Count; i++)
+        // Check if any key bound to a seed is pressed
+        foreach (var entry in keyToSeedMapping)
         {
-            if (Input.GetKeyDown((KeyCode)(KeyCode.Alpha1 + i)))
+            if (Input.GetKeyDown(entry.Key))
             {
-                selectedSeedIndex = i;
+                string seedName = entry.Value;
+                selectedSeedIndex = seedTypes.FindIndex(seed => seed.seedName == seedName);
                 UpdateSeedDisplay();
                 break;
             }
+        }
+        if (GetCurrentSeedCount() <= 0)
+        {
+            SwitchToNextAvailableSeed();
         }
     }
 
     public string GetCurrentSeed()
     {
-        return (seedNames.Count > 0 && selectedSeedIndex < seedNames.Count) 
-            ? seedNames[selectedSeedIndex] 
+        return (seedTypes.Count > 0 && selectedSeedIndex < seedTypes.Count)
+            ? seedTypes[selectedSeedIndex].seedName
             : "No seeds selected";
     }
 
@@ -65,9 +72,7 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             seedCounts.Add(seedName, amount);
-            seedNames.Add(seedName);
         }
-        selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, seedNames.Count - 1);
         UpdateSeedDisplay();
     }
 
@@ -79,9 +84,7 @@ public class PlayerInventory : MonoBehaviour
             if (seedCounts[seedName] <= 0)
             {
                 seedCounts.Remove(seedName);
-                seedNames.Remove(seedName);
             }
-            selectedSeedIndex = Mathf.Clamp(selectedSeedIndex, 0, seedNames.Count - 1);
             UpdateSeedDisplay();
         }
     }
@@ -108,8 +111,11 @@ public class PlayerInventory : MonoBehaviour
         foodAmount += amount;
         UpdateFoodDisplay();
     }
-    public void RemoveFood(int amount){
-        if (foodAmount > 0){
+
+    public void RemoveFood(int amount)
+    {
+        if (foodAmount > 0)
+        {
             foodAmount -= amount;
             UpdateFoodDisplay();
         }
@@ -119,7 +125,7 @@ public class PlayerInventory : MonoBehaviour
     {
         UpdateSeedDisplay();
         UpdateCoinDisplay();
-        UpdateFoodDisplay(); 
+        UpdateFoodDisplay();
     }
 
     private void UpdateSeedDisplay()
@@ -151,7 +157,6 @@ public class PlayerInventory : MonoBehaviour
     public void ClearSeeds()
     {
         seedCounts.Clear();
-        seedNames.Clear();
         selectedSeedIndex = 0;
         UpdateSeedDisplay();
     }
@@ -163,7 +168,22 @@ public class PlayerInventory : MonoBehaviour
             if (!seedCounts.ContainsKey(seedType.seedName))
             {
                 seedCounts.Add(seedType.seedName, seedType.seedAmount);
-                seedNames.Add(seedType.seedName);
+                keyToSeedMapping.Add(seedType.keyBinding, seedType.seedName); // Map key to seed name
+            }
+        }
+    }
+     private void SwitchToNextAvailableSeed()
+    {
+        // Find the next seed with a positive count
+        for (int i = 0; i < seedTypes.Count; i++)
+        {
+            int index = (selectedSeedIndex + i + 1) % seedTypes.Count;
+            string seedName = seedTypes[index].seedName;
+            if (seedCounts.ContainsKey(seedName) && seedCounts[seedName] > 0)
+            {
+                selectedSeedIndex = index;
+                UpdateSeedDisplay();
+                return;
             }
         }
     }
