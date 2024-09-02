@@ -31,14 +31,14 @@ public class CropTrigger : MonoBehaviour
         if (audioManager == null){
             Debug.LogError("AudioManager Not Here");
         }
-        soilPath.SetActive(false);
+        //soilPath.SetActive(false);
     }
     public void EnableTrigger()
     {
         if (cropCollider != null)
         {
             cropCollider.enabled = true;
-            soilPath.SetActive(true);
+            soilPath.SetActive(false);
             Debug.Log("CropTrigger enabled at: " + transform.position);
         }
     }
@@ -47,7 +47,7 @@ public class CropTrigger : MonoBehaviour
         if (cropCollider != null)
         {
             cropCollider.enabled = false;
-            soilPath.SetActive(false);
+            soilPath.SetActive(true);
             Debug.Log("CropTrigger disabled at: " + transform.position);
         }
     }

@@ -8,24 +8,27 @@ public class Threshold : MonoBehaviour
     public Slider startThreshold;
     public float amountThreshold = 0f;
     public bool IsFed = false;
+    public float maxVal = 100f;
 
     void Start()
     {
-        startThreshold.maxValue = 10f;
+        startThreshold.maxValue = maxVal;
         startThreshold.value = amountThreshold;
     }
 
     void Update()
     {
-        if (startThreshold.maxValue < amountThreshold)
+        if (startThreshold.maxValue <= amountThreshold)
         {
             IsFed = true;
-            startThreshold.maxValue *= 2f;
-            amountThreshold = 0f;
+            //startThreshold.maxValue *= 2f;
+            //amountThreshold = 0f;
+            amountThreshold = startThreshold.maxValue;
         }
-        else 
+        /*else 
         {
             startThreshold.value = amountThreshold;
-        }
+        }*/
+        startThreshold.value = amountThreshold;
     }
 }
