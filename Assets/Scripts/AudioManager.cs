@@ -10,19 +10,32 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     void Awake()
     {
-        if(instance == null){
+        if (instance == null)
+        {
             instance = this;
-        }else{
+            DontDestroyOnLoad(gameObject);
+            InitializeSounds();
+            Debug.Log("AudioManager instance created and set to DontDestroyOnLoad.");
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Duplicate AudioManager found. Destroying the new instance.");
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
-        foreach (Sound s in sounds){
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
+    }
+    private void InitializeSounds()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source == null)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+            }
         }
     }
     public void Start(){

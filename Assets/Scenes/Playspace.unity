@@ -9944,7 +9944,7 @@ MonoBehaviour:
   startThreshold: {fileID: 1340194720}
   amountThreshold: 0
   IsFed: 0
-  maxVal: 100
+  maxVal: 500
 --- !u!114 &1340194720
 MonoBehaviour:
   m_ObjectHideFlags: 0

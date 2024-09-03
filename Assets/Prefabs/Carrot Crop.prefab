@@ -429,7 +429,7 @@ MonoBehaviour:
   growthStages:
   - {fileID: 1269411953277436661}
   - {fileID: 8249931748029321997}
-  timeBetweenStages: 10
+  timeBetweenStages: 20
   countdownText: {fileID: 717508692046418738}
 --- !u!1 &8249931748029321997
 GameObject:
@@ -503,8 +503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownText: {fileID: 717508692046418738}
-  coinReward: 10
-  foodReward: 10
+  coinReward: 30
+  foodReward: 20
   textObj: {fileID: 1013569794170008193}
 --- !u!1001 &818640492336737031
 PrefabInstance:
