@@ -12,7 +12,11 @@ public class Playercontrol : MonoBehaviour
     private Vector3 _Input;
     public Vector3 Initalrotation = new Vector3(-90,0,0);
     private AudioManager audioManager;
-
+    Animator PA;
+    private void Awake()
+    {
+        PA = GetComponent<Animator>();
+    }
     private void Start()
     {
         transform.rotation = Quaternion.Euler(Initalrotation);
@@ -58,6 +62,7 @@ public class Playercontrol : MonoBehaviour
             {
                 audioManager.Play("Walking");
             }
+            PA.SetBool("Walk", true);
         }
         else
         {
@@ -66,6 +71,7 @@ public class Playercontrol : MonoBehaviour
             {
                 audioManager.Stop("Walking");
             }
+            PA.SetBool("Walk", false);
         }
     }
 
