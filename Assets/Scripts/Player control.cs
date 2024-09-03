@@ -51,20 +51,22 @@ public class Playercontrol : MonoBehaviour
 
     void Move()
     {
-        // _rb.MovePosition(transform.position + (transform.forward * _Input.magnitude) * _speed * Time.deltaTime);
-        if(_Input.magnitude > 0){
+        if (_Input.magnitude > 0)
+        {
             _rb.MovePosition(transform.position + (transform.forward * _Input.magnitude) * _speed * Time.deltaTime);
-            if (!audioManager.IsPlaying("Walking")){
+            if (audioManager != null && !audioManager.IsPlaying("Walking"))
+            {
                 audioManager.Play("Walking");
             }
-        }else{
-        // Stop the walking sound if the player stops moving
-            if (audioManager.IsPlaying("Walking"))
+        }
+        else
+        {
+            // Stop the walking sound if the player stops moving
+            if (audioManager != null && audioManager.IsPlaying("Walking"))
             {
                 audioManager.Stop("Walking");
             }
-
         }
-    }  
+    }
 
 }
