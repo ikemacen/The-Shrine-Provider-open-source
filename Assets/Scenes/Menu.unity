@@ -1448,7 +1448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &423225471
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1767,6 +1767,117 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546655564}
   m_CullTransparentMesh: 1
+--- !u!1 &559413526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559413528}
+  - component: {fileID: 559413527}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &559413527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559413526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4f63ca826ce49efb94ac248334fcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Theme
+    clip: {fileID: 8300000, guid: 856872e54194b4b7ab966d49cb9250c4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Menu Theme
+    clip: {fileID: 8300000, guid: 9bad0dbdfad7141a1b78f0615e0bbf08, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: Water
+    clip: {fileID: 8300000, guid: 2167acfed398c4868a734fa67dffa072, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Harvest
+    clip: {fileID: 8300000, guid: 4e4008c280b5a499c9043738418d127c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Bag
+    clip: {fileID: 8300000, guid: 671537d3a1d0f4f2294255f00c5918f1, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Plant
+    clip: {fileID: 8300000, guid: e18369b8b808d4296b50744e515c126d, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Box1
+    clip: {fileID: 8300000, guid: 7b869e9bf209c4da5915cbd6d1ccea27, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Box2
+    clip: {fileID: 8300000, guid: ee716c7be47694dd6a7f0a1f02932ad2, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Button
+    clip: {fileID: 8300000, guid: 573f2a700e0864e18b66f17af4349cce, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Walking
+    clip: {fileID: 8300000, guid: c2d6b549302604d0b9c4fa9fbf5a344c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Bucket
+    clip: {fileID: 8300000, guid: 65416c07f8d454dd79d75f25521a8ab9, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+--- !u!4 &559413528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559413526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1559.444, y: 927.5179, z: 165.48784}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &605752108
 GameObject:
   m_ObjectHideFlags: 0
@@ -6206,3 +6317,4 @@ SceneRoots:
   - {fileID: 1851271991}
   - {fileID: 1154150520}
   - {fileID: 423225472}
+  - {fileID: 559413528}

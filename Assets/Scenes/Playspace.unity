@@ -1731,7 +1731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &260255266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,6 +1751,12 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 1
+  - name: Menu Theme
+    clip: {fileID: 8300000, guid: 65416c07f8d454dd79d75f25521a8ab9, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
   - name: Water
     clip: {fileID: 8300000, guid: 2167acfed398c4868a734fa67dffa072, type: 3}
     volume: 1

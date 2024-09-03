@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     public void Start(){
-        Play("Theme");
+        Play("Menu Theme");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -88,9 +88,11 @@ public class AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         if(scene.name == "Menu"){
+            Play("Menu Theme");
             Stop("Theme");
         }else if(scene.name == "Playspace"){
             Play("Theme");
+            Stop("Menu Theme");
         }
     }
     void OnDestroy(){

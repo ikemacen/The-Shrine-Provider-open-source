@@ -19,10 +19,10 @@ public class Items : MonoBehaviour
         {
             default:
             case Itemtype.none: return 0;
-            case Itemtype.CarrotCrop: return 25;
+            case Itemtype.CarrotCrop: return 20;
             case Itemtype.TomatoCrop: return 5;
             case Itemtype.WheatCrop: return 10;
-            case Itemtype.CornCrop: return 30;
+            case Itemtype.CornCrop: return 45;
         }
     }
 }
