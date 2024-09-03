@@ -51,7 +51,7 @@ MonoBehaviour:
   growthStages:
   - {fileID: 8403132880929929754}
   - {fileID: 8173675818786999238}
-  timeBetweenStages: 10
+  timeBetweenStages: 5
   countdownText: {fileID: 7242822160747463091}
 --- !u!1 &6009535778619591156
 GameObject:

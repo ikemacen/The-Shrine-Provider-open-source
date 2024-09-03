@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownText: {fileID: 556641425671542910}
-  coinReward: 10
-  foodReward: 5
+  coinReward: 15
+  foodReward: 15
   textObj: {fileID: 9110714674224210634}
 --- !u!65 &2151129958011392963
 BoxCollider:
