@@ -12834,6 +12834,7 @@ MonoBehaviour:
   _rb: {fileID: 1347988138}
   _speed: 5
   _turnspeed: 360
+  SecsBetweenSteps: 0.5
   Initalrotation: {x: 0, y: 0, z: 0}
 --- !u!4 &1347988140
 Transform:

@@ -9,9 +9,12 @@ public class Playercontrol : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnspeed = 360;
+    public float TimeBetweenSteps = 0.5f;
     private Vector3 _Input;
     public Vector3 Initalrotation = new Vector3(-90,0,0);
     private AudioManager audioManager;
+    private IEnumerator coroutine;
+    private bool PlaySound = false;
     Animator PA;
     private void Awake()
     {
@@ -55,12 +58,18 @@ public class Playercontrol : MonoBehaviour
 
     void Move()
     {
+        coroutine = WaitTime(TimeBetweenSteps);
+
         if (_Input.magnitude > 0)
         {
             _rb.MovePosition(transform.position + (transform.forward * _Input.magnitude) * _speed * Time.deltaTime);
             if (audioManager != null && !audioManager.IsPlaying("Walking"))
             {
-                audioManager.Play("Walking");
+                if(PlaySound == false)
+                {
+                    StartCoroutine(coroutine);
+                    PlaySound = true;
+                }
             }
             PA.SetBool("Walk", true);
         }
@@ -75,4 +84,10 @@ public class Playercontrol : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitTime(float WaitAudio)
+    {
+        audioManager.Play("Walking");
+        yield return new WaitForSeconds(WaitAudio);
+        PlaySound = false;
+    }
 }
