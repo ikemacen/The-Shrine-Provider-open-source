@@ -2144,7 +2144,7 @@ MonoBehaviour:
     this\n\n-Hold a\t\t, when over a patch of dirt, press E to plant seed\n\t\n\t-
     Press the Number Keys on top of the keyboard to switch between seeds\n\t\n\t-
     The planted seed will display a time \n\n-When the plant is fully matured, press
-    X to harvest the seed.\n"
+    E to harvest the seed."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d52cc25b845b24aefa170f0100f530d8, type: 2}
   m_sharedMaterial: {fileID: -3869280218014595151, guid: d52cc25b845b24aefa170f0100f530d8, type: 2}

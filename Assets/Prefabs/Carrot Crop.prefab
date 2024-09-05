@@ -99,7 +99,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -429,7 +429,7 @@ MonoBehaviour:
   growthStages:
   - {fileID: 1269411953277436661}
   - {fileID: 8249931748029321997}
-  timeBetweenStages: 20
+  timeBetweenStages: 40
   countdownText: {fileID: 717508692046418738}
 --- !u!1 &8249931748029321997
 GameObject:
