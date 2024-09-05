@@ -57,7 +57,7 @@ public class CropDestroy : MonoBehaviour
 
     private void Update()
     {
-        if (inTrigger && Input.GetKeyDown(KeyCode.X))
+        if (inTrigger && Input.GetKeyDown(KeyCode.E))
         {
             if (cropTrigger != null && cropTrigger.currentCrop != null)
             {
